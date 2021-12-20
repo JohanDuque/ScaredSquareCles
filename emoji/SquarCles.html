@@ -1,0 +1,325 @@
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <style>
+         :root {
+            --background-size: 20px 20px;
+            --background-color: #ff880e;
+            --background-border: 10px solid #808080;
+            --skin-color: orange;
+            --border-radius: 33%;
+            --head-top: 50%;
+            --head-left: 50%;
+            --head-translate: translate(-50%, -50%);
+            --eye-size: 30%;
+            --left-eye-top: 15%;
+            --left-eye-horiz: 15%;
+            --left-eye-color: #fff4e2;
+            --right-eye-top: 15%;
+            --right-eye-horiz: 15%;
+            --right-eye-color: #fff4e2;
+            --iris-color: green;
+            --iris-size: 30px;
+            --iris-after-size: 15px;
+            --mouth-color: black;
+            --mouth-height: 25%;
+            --mouth-width: 25%;
+            --mouth-left: 25%;
+            --mouth-top: 60%;
+            /*animations*/
+            --head-animation: float 3s infinite;
+            --eye-blink-animation: blink 3s infinite;
+            --mouth-blink-animation: blink 5s infinite;
+            --mouth-animation: zoom 3s infinite;
+            --shadow-animation: zoom 3s infinite;
+            /*Keyframes*/
+            --keyframe-translate-1: translateX(0px);
+            --keyframe-translate-2: translateX(-99%);
+            --keyframe-translate-3: translateY(99%);
+            --keyframe-translate-4: translateX(99%);
+            --keyframe-translate-5: translateY(-99%);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .background {
+            margin: 5% auto;
+            position: relative;
+            width: 65%;
+            height: 85%;
+            background-color: var(--background-color);
+            border: var(--background-border);
+            border-radius: 10px;
+            z-index: 0;
+            background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+            background-size: var(--background-size);
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        
+        .head {
+            background: var(--skin-color);
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            top: var(--head-top);
+            left: var(--head-left);
+            /*transform: var(--head-translate);*/
+            border-radius: var(--border-radius);
+            animation: var(--head-animation);
+        }
+        
+        .left-eye {
+            position: absolute;
+            top: var(--left-eye-top);
+            left: var(--left-eye-horiz);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: var(--eye-size);
+            width: var(--eye-size);
+            border-radius: var(--border-radius);
+            background-color: var(--left-eye-color);
+        }
+        
+        .right-eye {
+            position: absolute;
+            top: var(--right-eye-top);
+            right: var(--right-eye-horiz);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: var(--eye-size);
+            width: var(--eye-size);
+            border-radius: var(--border-radius);
+            background-color: var(--right-eye-color);
+        }
+        
+        .eye:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0px;
+            right: 0px;
+            z-index: 3;
+            width: 100%;
+            height: 0;
+            background: var(--skin-color);
+            /* eye-browns border: 3px solid black; */
+            animation: var(--eye-blink-animation);
+        }
+        
+        .eye:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0px;
+            right: 0px;
+            z-index: 3;
+            width: 100%;
+            height: 0;
+            background: var(--skin-color);
+            animation: var(--eye-blink-animation);
+        }
+        
+        .iris {
+            height: var(--iris-size);
+            width: var(--iris-size);
+            border-radius: var(--border-radius);
+            background-color: var(--iris-color);
+            animation: eyemove 3s infinite;
+        }
+        
+        .iris:after {
+            content: '';
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--iris-after-size);
+            width: var(--iris-after-size);
+            border-radius: var(--border-radius);
+            background-color: #000;
+        }
+        
+        .mouth {
+            position: absolute;
+            top: var(--mouth-top);
+            left: var(--mouth-left);
+            height: var(--mouth-height);
+            width: var(--mouth-width);
+            border-radius: var(--border-radius);
+            background-color: var(--mouth-color);
+            animation: var(--mouth-animation);
+        }
+        
+        .mouth:before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            width: 100%;
+            height: 0;
+            background: var(--skin-color);
+            animation: var(--mouth-blink-animation);
+        }
+        
+        .mouth:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            width: 100%;
+            height: 0;
+            background: var(--skin-color);
+            animation: var(--mouth-blink-animation);
+        }
+        
+        .shadow {
+            position: absolute;
+            top: 101%;
+            height: 25%;
+            width: 100%;
+            border-radius: var(--border-radius);
+            background-color: rgba(0, 0, 0, .7);
+            animation: var(--shadow-animation);
+        }
+        
+        @keyframes eyemove {
+            0% {
+                transform: var(--keyframe-translate-1);
+            }
+            20%,
+            25% {
+                transform: var(--keyframe-translate-2);
+            }
+            35%,
+            45% {
+                transform: var(--keyframe-translate-3);
+            }
+            50%,
+            55% {
+                transform: var(--keyframe-translate-4);
+            }
+            65%,
+            70% {
+                transform: var(--keyframe-translate-5);
+                /*transform: translateY(-99px);*/
+            }
+            80%,
+            85% {
+                transform: translateX(0px);
+            }
+        }
+        
+        @keyframes blink {
+            0%,
+            60% {
+                height: 0;
+            }
+            67%,
+            70% {
+                height: 55%;
+            }
+            75% {
+                height: 0;
+            }
+            80% {
+                height: 55%;
+            }
+            85%,
+            100% {
+                height: 0;
+            }
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transfrom: translateY(0);
+            }
+            50% {
+                transform: translateY(-30%);
+            }
+        }
+        
+        @keyframes zoom {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+    <script src="styles.js"></script>
+    <script src="index.js"></script>
+    <div class="background"></div>
+    <script>
+        document.body.onload = addHead();
+
+        function addHead() {
+            const head = document.createElement("div");
+            head.id = "head";
+            head.setAttribute("class", "head");
+
+            // EYES
+            const leftIris = document.createElement("div");
+            leftIris.id = "leftIris";
+            leftIris.setAttribute("class", "iris");
+            const leftEye = document.createElement("div");
+            leftEye.id = "leftEye";
+            leftEye.setAttribute("class", "left-eye eye");
+            leftEye.appendChild(leftIris);
+
+            const rightIris = document.createElement("div");
+            rightIris.id = "rightIris";
+            rightIris.setAttribute("class", "iris");
+            const rightEye = document.createElement("div");
+            rightEye.id = "rightEye";
+            rightEye.setAttribute("class", "right-eye eye");
+            rightEye.appendChild(rightIris);
+
+            //MOUTH
+            const mouth = document.createElement("div");
+            mouth.id = "mouth";
+            mouth.setAttribute("class", "mouth");
+
+            head.appendChild(leftEye);
+            head.appendChild(rightEye);
+            head.appendChild(mouth);
+
+            document.body.appendChild(head);
+
+            const shadow = document.createElement("div");
+            shadow.id = "shadow";
+            shadow.setAttribute("class", "shadow");
+            head.appendChild(shadow);
+
+            if (typeof randomStyles == 'function') {
+                randomStyles();
+            }
+
+            if (typeof saveToFile == 'function') {
+                //saveToFile();
+            }
+        }
+
+        /*
+        setTimeout(function() {
+            window.location.reload(1);
+        }, 10000);
+        */
+    </script>
+</body>
